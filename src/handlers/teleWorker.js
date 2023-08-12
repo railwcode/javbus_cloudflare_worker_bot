@@ -1,5 +1,5 @@
 import Telegram from '../utils/telegram'
-import { BOT_TOKEN,ERRLOG_CHANNEL,ROBOT_NAME } from '../config'
+import { ROBOT_NAME } from '../config'
 import { reqJavbus } from '../utils/javbus'
 
 export default async request => {
@@ -51,6 +51,10 @@ export default async request => {
 
       try {
         let {title,img,resultList} = await reqJavbus(code)
+
+        if  (!img.startsWith('https://www.javbus.com')){
+          img = 'https://www.javbus.com'+img
+        }
 
         let media = {
           caption: title,
